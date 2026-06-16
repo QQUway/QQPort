@@ -1,0 +1,32 @@
+{
+  "username": "qquway",
+  "alias": "qquway",
+  "legal_identity": "Rifqi Habib Ur Rahman",
+  "role": "Embedded Systems Engineer, Linux Enthusiast",
+  "background": "An undergraduate in computer engineering, experienced in embedded systems design, Network Management, Linux System Administration, Parametric 3D Modelling, and backend website development.\n\nI like to experiment on my projects which most often correlate to my hobby as a musician. These approach helped me to grow as an embedded system engineer, a backend web developer, and as a linux user. Read more about these projects by typing ./projects on the terminal.",
+  "skills": [
+    "C",
+    "CPP",
+    "Python",
+    "NodeJS",
+    "React",
+    "Rust",
+    "Cisco",
+    "Huawei_ENSP",
+    "Linux System Administration",
+    "Microcontroller",
+    "Embedded Software",
+    "Embedded Hardware",
+    "EDA",
+    "Arduino IDE",
+    "STM32CubeProgrammer",
+    "FreeCAD",
+    "Parametric 3d Modelling"
+  ],
+  "certifications": [
+    "Cisco CCNAV1",
+    "BNSP KKNI Level 2 Teknik Komputer Jaringan",
+    "IELTS_Academics_Band_7.5"
+  ],
+  "cv_path": "/uploads/cv/cv.pdf"
+}
