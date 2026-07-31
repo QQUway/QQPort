@@ -20,6 +20,7 @@ export const ALL_WORKS = [
       { name: 'Svetlana Abigail Valeria Tambuwun', role: 'Composer / Lyricist' },
       { name: 'Muhammad Fabiansyah Abubakar',      role: 'Composer / Lyricist' },
     ],
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/0d/cf/8e0dcfa7-f537-b67e-c0bd-2af88a3e50d7/198500379730.jpg/600x600bb.jpg',
     links: {
       spotify: 'https://open.spotify.com/search/Northanger%20Melancholic%20Ensemble',
       apple:   'https://music.apple.com/search?term=Northanger+Melancholic+Ensemble',
@@ -39,6 +40,7 @@ export const ALL_WORKS = [
     credits: [
       { name: 'Rifqi Habib Ur Rahman', role: 'Composer / Producer' }
     ],
+    artwork: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/da/49/a1/da49a1ac-2fad-5d3a-3cd3-2bee168d189c/823000728091.png/600x600bb.jpg',
     links: {
       spotify: 'https://open.spotify.com/search/8Uway%20Limbo',
       apple:   'https://music.apple.com/search?term=8Uway+Limbo',
@@ -68,6 +70,9 @@ const WorkCard = ({ work, isExpanded, onToggle }) => {
         aria-expanded={work.status === 'released' ? isExpanded : undefined}
         style={{ cursor: work.status === 'released' ? 'pointer' : 'default' }}
       >
+        {work.artwork && (
+          <img className="music-work-artwork" src={work.artwork} alt={`${work.title} artwork`} />
+        )}
         <div className="music-work-left">
           <div className="music-work-badges">
             <span className={`music-status-badge ${cfg.cls}`}>{cfg.label}</span>

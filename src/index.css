@@ -2220,3 +2220,23 @@ a:hover { text-shadow: 0 0 8px var(--accent-glow); }
 .active-prompt {
   margin-top: var(--sp-2);
 }
+
+.music-work-artwork {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-active);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 600px) {
+  .music-work-header {
+    flex-direction: column;
+  }
+  .music-work-artwork {
+    width: 80px;
+    height: 80px;
+  }
+}
