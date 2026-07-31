@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Arpeggiator from './Arpeggiator';
 
 /* ── All releases in one unified list ── */
-const ALL_WORKS = [
+export const ALL_WORKS = [
   /* ── RELEASED ── */
   {
     id:      1,

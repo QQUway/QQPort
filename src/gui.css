@@ -1,0 +1,344 @@
+/* GUI Mode CSS - Modern, vibrant, dark theme */
+.gui-mode {
+  --gui-bg: #0d0d12;
+  --gui-surface: rgba(22, 22, 34, 0.6);
+  --gui-surface-hover: rgba(32, 32, 48, 0.8);
+  --gui-text: #e0e0e0;
+  --gui-text-muted: rgba(224, 224, 224, 0.6);
+  --gui-accent: #ff7eb3;
+  --gui-accent-glow: rgba(255, 126, 179, 0.3);
+  --gui-secondary: #58a6ff;
+  --gui-border: rgba(255, 255, 255, 0.1);
+  --gui-radius: 12px;
+  --font-sans: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+  
+  background-color: var(--gui-bg);
+  color: var(--gui-text);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Base resets for GUI mode */
+.gui-mode * {
+  box-sizing: border-box;
+}
+
+.gui-mode h1, .gui-mode h2, .gui-mode h3, .gui-mode p {
+  margin: 0;
+  padding: 0;
+}
+
+.gui-mode a {
+  color: var(--gui-accent);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.gui-mode a:hover {
+  opacity: 0.8;
+}
+
+/* Background effects */
+.gui-bg-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 15% 50%, rgba(255, 126, 179, 0.05), transparent 50%),
+              radial-gradient(circle at 85% 30%, rgba(88, 166, 255, 0.05), transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Navigation */
+.gui-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(13, 13, 18, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gui-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.gui-nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.gui-nav-link {
+  color: var(--gui-text-muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+.gui-nav-link:hover, .gui-nav-link.active {
+  color: var(--gui-accent);
+  text-shadow: 0 0 10px var(--gui-accent-glow);
+}
+
+/* Main Container */
+.gui-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 70px; /* offset for nav */
+}
+
+/* Sections */
+.gui-section {
+  padding: 6rem 0;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gui-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #fff, var(--gui-text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Hero */
+.gui-hero {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.gui-hero h1 {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.gui-hero .highlight {
+  color: var(--gui-accent);
+  text-shadow: 0 0 20px var(--gui-accent-glow);
+}
+
+.gui-hero-role {
+  font-size: 1.5rem;
+  color: var(--gui-text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.gui-btn-primary {
+  background: var(--gui-accent);
+  color: #fff !important;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--gui-accent-glow);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gui-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--gui-accent-glow);
+  color: #fff;
+}
+
+/* Project Cards */
+.gui-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.gui-project-card {
+  background: var(--gui-surface);
+  border: 1px solid var(--gui-border);
+  border-radius: var(--gui-radius);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(8px);
+}
+
+.gui-project-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 126, 179, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: var(--gui-surface-hover);
+}
+
+.gui-project-image-wrap {
+  width: 100%;
+  height: 180px;
+  border-radius: calc(var(--gui-radius) - 4px);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.2);
+}
+
+.gui-project-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gui-project-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--gui-text);
+}
+
+.gui-project-desc {
+  color: var(--gui-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.gui-project-link {
+  align-self: flex-start;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* About Section */
+.gui-about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.gui-about-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--gui-text-muted);
+}
+
+.gui-skills-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.gui-skill-tag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--gui-text);
+}
+
+/* Certs List */
+.gui-certs-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.gui-certs-list li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--gui-text-muted);
+}
+
+.gui-certs-list li::before {
+  content: "◈";
+  position: absolute;
+  left: 0;
+  color: var(--gui-secondary);
+}
+
+/* Contact Cards */
+.gui-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.gui-contact-card {
+  background: var(--gui-surface);
+  border: 1px solid var(--gui-border);
+  border-radius: var(--gui-radius);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gui-text);
+}
+
+.gui-contact-card:hover {
+  background: var(--gui-surface-hover);
+  border-color: var(--gui-secondary);
+  color: var(--gui-text);
+}
+
+.gui-contact-icon {
+  font-size: 2rem;
+  color: var(--gui-secondary);
+}
+
+/* Footer */
+.gui-footer {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--gui-text-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--gui-border);
+  margin-top: 4rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gui-about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .gui-hero h1 {
+    font-size: 3rem;
+  }
+  
+  .gui-nav-links {
+    gap: 1rem;
+  }
+}
