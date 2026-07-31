@@ -31,7 +31,7 @@ export const ALL_WORKS = [
     id:          2,
     status:      'released',
     title:       'Limbo',
-    artist:      'Northanger',
+    artist:      '8Uway',
     year:        new Date().getFullYear().toString(),
     genre:       'Indie / Shoegaze',
     role:        ['Composer', 'Producer'],
@@ -40,8 +40,8 @@ export const ALL_WORKS = [
       { name: 'Rifqi Habib Ur Rahman', role: 'Composer / Producer' }
     ],
     links: {
-      spotify: 'https://open.spotify.com/search/Northanger%20Limbo',
-      apple:   'https://music.apple.com/search?term=Northanger+Limbo',
+      spotify: 'https://open.spotify.com/search/8Uway%20Limbo',
+      apple:   'https://music.apple.com/search?term=8Uway+Limbo',
     },
   },
 ];
