@@ -281,6 +281,15 @@ const TerminalEmulator = ({ projects, about, switchMode, fetchData }) => {
             {about.skills.map((s, i) => <span key={i} className="skill-tag">{s}</span>)}
           </div>
         </div>
+
+        {about.certifications && about.certifications.length > 0 && (
+          <div className="mt-2">
+            <strong>Certifications:</strong>
+            <ul className="mt-1" style={{ listStyleType: 'square', paddingLeft: '20px' }}>
+              {about.certifications.map((c, i) => <li key={i}>{c}</li>)}
+            </ul>
+          </div>
+        )}
         
         <div className="mt-2">
           <strong>Contact:</strong>

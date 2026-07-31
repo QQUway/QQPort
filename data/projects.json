@@ -1,18 +1,39 @@
 [
   {
+    "id": 2,
+    "title": "Hazy Memory",
+    "description": "A memory allocator written in Rust with built-in intentional corruption for fuzzing.",
+    "content": "Traditional allocators are safe, but Hazy Memory is designed for chaos. It randomly injects noise into allocated memory blocks to test application resilience. It's like applying a fuzz pedal to your RAM. Useful for security researchers and chaos engineers.",
+    "images": [
+      "/hazy_glow.png"
+    ],
+    "link": "https://github.com/qquway/hazy-memory"
+  },
+  {
+    "id": 3,
+    "title": "Distorted Reality",
+    "description": "An experimental window manager that applies shaders to X11 windows.",
+    "content": "Why have clean, sharp windows when you can have blurred, chromatic-aberration-heavy interfaces? Distorted Reality intercepts X11 rendering and applies OpenGL shaders to every window, turning a standard Linux desktop into an ethereal dreamscape.",
+    "images": [
+      "/shoegaze_glitch.png",
+      "/hazy_glow.png"
+    ],
+    "link": "https://github.com/qquway/distorted-reality"
+  },
+  {
     "id": 4,
     "title": "SKETCHMIDI",
     "description": "A wireless MIDI controller with web-based preset manager for live performances.",
     "content": "SketchMIDI's Feature - Web preset manager, which let the user manage their live performances preset - Remote operation, which let the user manage sound configuration on live performances remotely without any cable - 6 Rotary Encoders - 6 Buttons - 6 Faders  SketchMIDI's Hardware & Software Info  Software - React - NodeJS - PlatformIO w/ Arduino framework  Hardware - ESP32S3 - Arduino Pro Micro - KY20 Rotary - 10K Faders - OLED Display",
     "images": [],
-    "link": "https://github.com/qquway/"
+    "link": "https://github.com/qquway/SKETCHMIDI"
   },
   {
     "id": 5,
     "title": "PEST",
     "description": "PEST is a steiner based smart fruit fly trap made for salacca farmers in Turi, Sleman.",
-    "content": "PEST\nPest\nEstimate\nSpread-spectrum\nTelemetry\n\nPEST was made for the MySalak project, which was funded by EPICS in IEEE, and executed by UMN's Computer Engineering department and UGM's Faculty of Agriculture.\n\nPEST uses IR Breaker to detect an entry event of flies, PEST will then transmit these gathered data via LoRa to an existing MySalak LoRaWAN Gateway and to the server to be used for monitoring and as dataset entries for MySalak pest prediction ML.\n\nPEST Hardware and Software info\n\nHardware\n- STM32U5 Microcontroller\n- 16 Photodiodes (2 sets of an 8x arrays)\n- 16 IR LED (2 sets of an 8x arrays)\n- 1,5 W Solar Panel\n- 7000mAh (2x VRK Black 18650 battery)\n- RFM95 LoRa module\n\nSoftware",
+    "content": "PEST\nPest\nEstimate\nSpread-spectrum\nTelemetry\n\nPEST was made for the MySalak project, which was funded by EPICS in IEEE, and executed by UMN's Computer Engineering department and UGM's Faculty of Agriculture.\n\nPEST uses IR Breaker to detect an entry event of flies, PEST will then transmit these gathered data via LoRa to an existing MySalak LoRaWAN Gateway and to the server to be used for monitoring and as dataset entries for MySalak pest prediction ML.\n\nPEST Hardware and Software info\n\nHardware\n- STM32U5 Microcontroller\n- 16 Photodiodes (2 sets of an 8x arrays)\n- 16 IR LED (2 sets of an 8x arrays)\n- 1,5 W Solar Panel\n- 7000mAh (2x VRK Black 18650 battery)\n- RFM95 LoRa module\n\nSoftware\n- FreeRTOS\n- STM32 HAL\n- LoRaWAN Stack",
     "images": [],
-    "link": "https://github.com/qquway"
+    "link": "https://github.com/qquway/PEST"
   }
 ]

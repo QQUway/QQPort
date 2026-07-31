@@ -52,11 +52,23 @@ const BootSequence = ({ onComplete }) => {
 
     timeoutId = setTimeout(showNextLine, 200);
 
-    return () => clearTimeout(timeoutId);
+    const skipBoot = () => {
+      clearTimeout(timeoutId);
+      onComplete();
+    };
+
+    window.addEventListener('keydown', skipBoot);
+    window.addEventListener('click', skipBoot);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('keydown', skipBoot);
+      window.removeEventListener('click', skipBoot);
+    };
   }, [onComplete]);
 
   return (
-    <div className="boot-sequence" ref={containerRef} style={{
+    <div className="boot-sequence" ref={containerRef} onClick={() => onComplete()} style={{
       width: '100%',
       height: '100%',
       color: '#aaa',
@@ -77,6 +89,9 @@ const BootSequence = ({ onComplete }) => {
         marginTop: '4px',
         animation: 'blink 1s step-end infinite' 
       }}></div>
+      <div style={{ position: 'absolute', bottom: '20px', right: '20px', color: '#555', fontSize: '12px' }}>
+        [Press any key or click to skip]
+      </div>
     </div>
   );
 };
