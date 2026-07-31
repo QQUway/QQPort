@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './gui.css';
 import { ALL_WORKS } from './MusicPage';
 import Arpeggiator from './Arpeggiator';
+import AsciiBackground from './AsciiBackground';
 
 const isStatic = !!import.meta.env.VITE_IS_STATIC;
 const API = isStatic ? '' : (import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:3000');
@@ -37,14 +38,15 @@ const GuiPortfolio = ({ projects, about, switchMode }) => {
 
   return (
     <div className="gui-mode">
+      <AsciiBackground />
       <div className="gui-bg-gradient"></div>
 
-      <nav className="gui-nav">
-        <div className="gui-nav-links">
-          <button className={`gui-nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={() => scrollTo('home')}>Home</button>
-          <button className={`gui-nav-link ${activeSection === 'projects' ? 'active' : ''}`} onClick={() => scrollTo('projects')}>Projects</button>
-          <button className={`gui-nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => scrollTo('about')}>About</button>
-          <button className={`gui-nav-link ${activeSection === 'music' ? 'active' : ''}`} onClick={() => scrollTo('music')}>Music</button>
+      <nav className="top-navbar" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: 'rgba(13, 13, 18, 0.8)', backdropFilter: 'blur(12px)' }}>
+        <div className="normie-nav-top">
+          <button className={`normie-btn glitch-text ${activeSection === 'home' ? 'active' : ''}`} data-text="Home" onClick={() => scrollTo('home')} aria-label="Home">Home</button>
+          <button className={`normie-btn glitch-text ${activeSection === 'projects' ? 'active' : ''}`} data-text="Projects" onClick={() => scrollTo('projects')} aria-label="Projects">Projects</button>
+          <button className={`normie-btn glitch-text ${activeSection === 'about' ? 'active' : ''}`} data-text="About Me" onClick={() => scrollTo('about')} aria-label="About Me">About Me</button>
+          <button className={`normie-btn glitch-text ${activeSection === 'music' ? 'active' : ''}`} data-text="Music" onClick={() => scrollTo('music')} aria-label="Music">Music</button>
         </div>
       </nav>
 
