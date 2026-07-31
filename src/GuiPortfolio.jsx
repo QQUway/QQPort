@@ -130,27 +130,33 @@ const GuiPortfolio = ({ projects, about, switchMode }) => {
           <div style={{ marginBottom: '4rem' }}>
             {ALL_WORKS.map((work) => (
               <div key={work.id} className="gui-project-card" style={{ marginBottom: '1.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                  <h3 className="gui-project-title" style={{ margin: 0 }}>
-                    {work.title}
-                    {work.artist && <span style={{ color: 'var(--gui-text-muted)', fontWeight: '400' }}> by {work.artist}</span>}
-                  </h3>
-                  <span className="gui-skill-tag" style={{ 
-                    borderColor: work.status === 'released' ? 'var(--gui-secondary)' : 'var(--linux-green)',
-                    color: work.status === 'released' ? 'var(--gui-secondary)' : 'var(--linux-green)'
-                  }}>
-                    {work.status.toUpperCase()}
-                  </span>
-                </div>
-                <p className="gui-about-text">{work.description}</p>
-                
-                {work.links && (
-                  <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                    {work.links.spotify && <a href={work.links.spotify} target="_blank" rel="noopener noreferrer" className="gui-btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Spotify</a>}
-                    {work.links.apple && <a href={work.links.apple} target="_blank" rel="noopener noreferrer" className="gui-btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', background: 'rgba(255,255,255,0.1)' }}>Apple Music</a>}
+                <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+                  {work.artwork && (
+                    <img src={work.artwork} alt={work.title} style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '8px', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }} />
+                  )}
+                  <div style={{ flex: 1, minWidth: '250px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                      <h3 className="gui-project-title" style={{ margin: 0 }}>
+                        {work.title}
+                        {work.artist && <span style={{ color: 'var(--gui-text-muted)', fontWeight: '400' }}> by {work.artist}</span>}
+                      </h3>
+                      <span className="gui-skill-tag" style={{ 
+                        borderColor: work.status === 'released' ? 'var(--gui-secondary)' : 'var(--linux-green)',
+                        color: work.status === 'released' ? 'var(--gui-secondary)' : 'var(--linux-green)'
+                      }}>
+                        {work.status.toUpperCase()}
+                      </span>
+                    </div>
+                    <p className="gui-about-text">{work.description}</p>
+                    
+                    {work.links && (
+                      <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                        {work.links.spotify && <a href={work.links.spotify} target="_blank" rel="noopener noreferrer" className="gui-btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Spotify</a>}
+                        {work.links.apple && <a href={work.links.apple} target="_blank" rel="noopener noreferrer" className="gui-btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', background: 'rgba(255,255,255,0.1)' }}>Apple Music</a>}
+                      </div>
+                    )}
                   </div>
-                )}
-                
+                </div>
                 {work.presaveEmbed && (
                   <div style={{ marginTop: '1.5rem' }}>
                     <iframe src={work.presaveEmbed} width="100%" height="200" frameBorder="0" title="Pre-save" loading="lazy"></iframe>
