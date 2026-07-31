@@ -3,7 +3,8 @@ import Arpeggiator from './Arpeggiator';
 import BootSequence from './BootSequence';
 import MusicPage from './MusicPage';
 import Neofetch from './Neofetch';
-
+import ModeSelector from './ModeSelector';
+import GuiPortfolio from './GuiPortfolio';
 // Static data — bundled at build time, edited via manage.js
 import projectsData from '../data/projects.json';
 import aboutData    from '../data/about.json';
@@ -19,6 +20,12 @@ function App() {
   const [activeProject, setActiveProject] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [cmdError, setCmdError] = useState('');
+
+  const [mode, setMode] = useState(localStorage.getItem('portfolioMode') || null);
+  const switchMode = (newMode) => {
+    setMode(newMode);
+    localStorage.setItem('portfolioMode', newMode);
+  };
 
   const navigate = (view) => {
     setCurrentView(view);
@@ -73,18 +80,24 @@ function App() {
     music: '~/music',
   }[currentView] ?? '~';
 
+  if (!isBooting && mode === 'gui') {
+    return <GuiPortfolio projects={projects} about={about} switchMode={switchMode} />;
+  }
+
   return (
     <div className="app-layout">
       <div className="ethereal-glow"></div>
 
-      <nav className="top-navbar">
-        <div className="normie-nav-top">
-          <button className={`normie-btn glitch-text ${currentView === 'hero'  ? 'active' : ''}`} data-text="Home"     onClick={() => navigate('hero')}  aria-label="Home">Home</button>
-          <button className={`normie-btn glitch-text ${currentView === 'home'  ? 'active' : ''}`} data-text="Projects" onClick={() => navigate('home')}  aria-label="Projects">Projects</button>
-          <button className={`normie-btn glitch-text ${currentView === 'about' ? 'active' : ''}`} data-text="About Me" onClick={() => navigate('about')} aria-label="About Me">About Me</button>
-          <button className={`normie-btn glitch-text ${currentView === 'music' ? 'active' : ''}`} data-text="Music"    onClick={() => navigate('music')} aria-label="Music">Music</button>
-        </div>
-      </nav>
+      {mode === 'terminal' && (
+        <nav className="top-navbar">
+          <div className="normie-nav-top">
+            <button className={`normie-btn glitch-text ${currentView === 'hero'  ? 'active' : ''}`} data-text="Home"     onClick={() => navigate('hero')}  aria-label="Home">Home</button>
+            <button className={`normie-btn glitch-text ${currentView === 'home'  ? 'active' : ''}`} data-text="Projects" onClick={() => navigate('home')}  aria-label="Projects">Projects</button>
+            <button className={`normie-btn glitch-text ${currentView === 'about' ? 'active' : ''}`} data-text="About Me" onClick={() => navigate('about')} aria-label="About Me">About Me</button>
+            <button className={`normie-btn glitch-text ${currentView === 'music' ? 'active' : ''}`} data-text="Music"    onClick={() => navigate('music')} aria-label="Music">Music</button>
+          </div>
+        </nav>
+      )}
 
       <main className="terminal-wrapper crt-flicker">
         <div className="scanlines"></div>
@@ -94,6 +107,8 @@ function App() {
             <div className="terminal-body rgb-split">
               {isBooting ? (
                 <BootSequence onComplete={handleBootComplete} />
+              ) : !mode ? (
+                <ModeSelector onSelect={switchMode} />
               ) : (
                 <>
                   {/* ── HERO / NEOFETCH ── */}
@@ -222,7 +237,7 @@ function App() {
               )}
             </div>
 
-            {!isBooting && (
+            {!isBooting && mode === 'terminal' && (
               <div className="prompt-box">
                 <div className="prompt-line">
                   <span className="prompt-user">guest@shoegaze-os</span>
@@ -248,6 +263,17 @@ function App() {
           </div>
         </div>
       </main>
+
+      {/* Terminal Mode Switcher */}
+      {!isBooting && mode === 'terminal' && (
+        <button 
+          onClick={() => switchMode('gui')} 
+          className="terminal-mode-switch-btn"
+          title="Switch to GUI mode"
+        >
+          ◈ GUI
+        </button>
+      )}
     </div>
   );
 }
