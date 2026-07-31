@@ -26,13 +26,23 @@ export const ALL_WORKS = [
     },
   },
 
-  /* ── UPCOMING ── */
+  /* ── RELEASED ── */
   {
     id:          2,
-    status:      'upcoming',
+    status:      'released',
     title:       'Limbo',
-    description: 'An upcoming release — atmospheric and textured. Pre-save to be notified on release day.',
-    presaveEmbed: 'https://show.co/social-unlock/5yLeo1NeY7pmHn2Dp8bGTR/widget',
+    artist:      'Northanger',
+    year:        new Date().getFullYear().toString(),
+    genre:       'Indie / Shoegaze',
+    role:        ['Composer', 'Producer'],
+    description: 'An atmospheric and textured release. Now available on all streaming platforms.',
+    credits: [
+      { name: 'Rifqi Habib Ur Rahman', role: 'Composer / Producer' }
+    ],
+    links: {
+      spotify: 'https://open.spotify.com/search/Northanger%20Limbo',
+      apple:   'https://music.apple.com/search?term=Northanger+Limbo',
+    },
   },
 ];
 
