@@ -1692,3 +1692,193 @@ a:hover { text-shadow: 0 0 8px var(--accent-glow); }
 .music-presave-wrap iframe {
   display: block;
 }
+
+/* =========================================================
+   MATRIX CANVAS VISUALIZER
+   ========================================================= */
+.arp-view {
+  position: relative;  /* contain the canvas */
+}
+
+.matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: var(--radius-md);
+  opacity: 0.55;
+}
+
+/* Push arp UI above canvas */
+.arp-view > *:not(.matrix-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Neofetch also uses the canvas as a background overlay */
+.nf-root {
+  position: relative;
+}
+
+.nf-root .matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.18;
+  border-radius: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nf-root > *:not(.matrix-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ambient now-playing badge */
+.nf-ambient-badge {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-color);
+  background: rgba(255,126,179,0.08);
+  border: 1px solid rgba(255,126,179,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.nf-ambient-badge:hover {
+  background: rgba(255,126,179,0.15);
+  border-color: rgba(255,126,179,0.4);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 4px rgba(255,126,179,0.2); }
+  50%       { box-shadow: 0 0 12px rgba(255,126,179,0.5); }
+}
+
+/* =========================================================
+   MUSIC PAGE — UNIFIED WORK CARDS
+   ========================================================= */
+.music-work-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.music-work-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.015);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.music-work-card.released:hover,
+.music-work-card.released.expanded {
+  border-color: rgba(255,126,179,0.3);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+.music-work-card.upcoming {
+  border-color: rgba(143,223,130,0.12);
+  background: rgba(143,223,130,0.015);
+}
+
+.music-work-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6);
+}
+
+.music-work-left { flex: 1; }
+
+.music-work-badges {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-3);
+}
+
+/* Status badges */
+.music-status-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.badge-released {
+  background: rgba(88,166,255,0.1);
+  border: 1px solid rgba(88,166,255,0.35);
+  color: var(--blue-accent);
+}
+
+.badge-upcoming {
+  background: rgba(143,223,130,0.1);
+  border: 1px solid rgba(143,223,130,0.3);
+  color: var(--linux-green);
+  animation: pulse-glow-green 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-green {
+  0%, 100% { box-shadow: none; }
+  50%       { box-shadow: 0 0 8px rgba(143,223,130,0.3); }
+}
+
+.music-work-description {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+/* ── Arpeggiator audio error banner ── */
+.arp-error-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-5);
+  margin-bottom: var(--sp-4);
+  background: rgba(255, 95, 86, 0.08);
+  border: 1px solid rgba(255, 95, 86, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--red-accent);
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+.arp-error-banner code {
+  background: rgba(255, 95, 86, 0.12);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+}
+
+.arp-error-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.vst-play-btn.disabled,
+.vst-play-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+}

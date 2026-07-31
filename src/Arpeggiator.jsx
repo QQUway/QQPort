@@ -297,13 +297,20 @@ const Arpeggiator = ({ onBack, embedded, initialPreset, autoPlay }) => {
       {!embedded && <h2 className="detail-title rgb-split">./arp</h2>}
       {!embedded && <p className="detail-content">Experimental VST Arpeggiator. Click piano keys to select notes.</p>}
 
-      {error && <div className="error-text">Audio Error: {error}</div>}
+      {error && (
+        <div className="arp-error-banner">
+          <span className="arp-error-icon">⚠</span>
+          <span>Audio sample unavailable — place <code>synth-one-shot-beam.wav</code> in <code>public/</code></span>
+        </div>
+      )}
 
       <div className="vst-container">
         <div className="vst-controls">
           <button
-            className={`vst-play-btn ${isPlaying ? 'active' : ''}`}
-            onClick={() => setIsPlaying(!isPlaying)}
+            className={`vst-play-btn ${isPlaying ? 'active' : ''} ${error ? 'disabled' : ''}`}
+            onClick={() => !error && setIsPlaying(!isPlaying)}
+            disabled={!!error}
+            title={error ? 'Audio sample unavailable' : (isPlaying ? 'Stop' : 'Play')}
           >
             {isPlaying ? '■ STOP' : '▶ PLAY'}
           </button>

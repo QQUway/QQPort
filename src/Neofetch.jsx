@@ -62,13 +62,13 @@ const useAmbientArp = () => {
   const nextTimeRef  = useRef(0);
   const absRef       = useRef(0);
   const stateRef     = useRef({ playing: false });
-  const [isPlaying,  setIsPlaying]  = useState(false);
-  const [analyser,   setAnalyser]   = useState(null);
-  const [currentSemi, setCurrentSemi] = useState(null);
+  const [isPlaying,       setIsPlaying]       = useState(false);
+  const [analyser,         setAnalyser]         = useState(null);
+  const [currentSemi,      setCurrentSemi]      = useState(null);
+  const [audioUnavailable, setAudioUnavailable] = useState(false);
 
   useEffect(() => {
     let ctx;
-    let startHandler;
     const init = async () => {
       try {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -79,33 +79,28 @@ const useAmbientArp = () => {
         setAnalyser(analyserNode);
 
         const res = await fetch('/synth-one-shot-beam.wav');
-        if (!res.ok) return;
+        if (!res.ok) { setAudioUnavailable(true); return; }
         const ab = await res.arrayBuffer();
         bufferRef.current = await ctx.decodeAudioData(ab);
 
-        // Auto-start after first user interaction (browser autoplay policy)
-        startHandler = async () => {
-          if (!ctx || ctx.state === 'closed' || stateRef.current.playing) return;
-          try {
-            if (ctx.state === 'suspended') await ctx.resume();
-            stateRef.current = { playing: true, ctx, analyserNode };
-            setIsPlaying(true);
-          } catch { /* context may have been closed before interaction */ }
+        // Auto-start after first any user interaction (browser policy)
+        const start = async () => {
+          if (stateRef.current.playing) return;
+          await ctx.resume();
+          stateRef.current = { playing: true, ctx, analyserNode };
+          setIsPlaying(true);
+          document.removeEventListener('click',   start);
+          document.removeEventListener('keydown', start);
         };
-        document.addEventListener('click',   startHandler, { once: true });
-        document.addEventListener('keydown', startHandler, { once: true });
-      } catch { /* audio unavailable */ }
+        document.addEventListener('click',   start, { once: true });
+        document.addEventListener('keydown', start, { once: true });
+      } catch { setAudioUnavailable(true); /* audio unavailable */ }
     };
     init();
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
       stateRef.current.playing = false;
-      // Remove listeners so they can't fire on a closed context
-      if (startHandler) {
-        document.removeEventListener('click',   startHandler);
-        document.removeEventListener('keydown', startHandler);
-      }
-      try { ctx?.close(); } catch { /* ignore close errors */ }
+      ctx?.close();
     };
   }, []);
 
@@ -166,14 +161,14 @@ const useAmbientArp = () => {
     setCurrentSemi(null);
   };
 
-  return { isPlaying, analyser, currentSemi, stop, setIsPlaying };
+  return { isPlaying, analyser, currentSemi, stop, setIsPlaying, audioUnavailable };
 };
 
 /* ── Main Neofetch component ── */
 const Neofetch = ({ projects = [], about = null, onNavigate }) => {
   const uptime = useUptime();
   const [resolution, setResolution] = useState('');
-  const { isPlaying, analyser, stop } = useAmbientArp();
+  const { isPlaying, analyser, stop, audioUnavailable } = useAmbientArp();
 
   useEffect(() => {
     const update = () => setResolution(`${window.innerWidth}x${window.innerHeight}`);
@@ -218,7 +213,18 @@ const Neofetch = ({ projects = [], about = null, onNavigate }) => {
         <InfoRow label="Uptime"     value={uptime} valueColor="var(--accent-color)" />
         <InfoRow label="Resolution" value={resolution} />
         <InfoRow label="Theme"      value="Shoegaze Dark [haze + chromatic]" valueColor="var(--accent-color)" />
-        <InfoRow label="Audio"      value={isPlaying ? 'Cmaj7 · 90bpm · Up/Down (ambient)' : 'click anywhere to enable'} valueColor={isPlaying ? 'var(--accent-color)' : undefined} />
+        <InfoRow label="Audio"
+          value={
+            audioUnavailable ? 'unavailable — synth-one-shot-beam.wav missing' :
+            isPlaying        ? 'Cmaj7 · 90bpm · Up/Down (ambient)' :
+                               'click anywhere to enable'
+          }
+          valueColor={
+            audioUnavailable ? 'var(--red-accent)' :
+            isPlaying        ? 'var(--accent-color)' :
+                               undefined
+          }
+        />
 
         <Divider />
 
@@ -231,7 +237,7 @@ const Neofetch = ({ projects = [], about = null, onNavigate }) => {
         <InfoRow label="Projects"   value={`${projCount} loaded`} valueColor="var(--blue-accent)" />
         <InfoRow label="Skills"     value={`${skillCount} indexed`} valueColor="var(--blue-accent)" />
         <InfoRow label="Certs"      value={`${certCount} obtained`} valueColor="var(--blue-accent)" />
-        <InfoRow label="Build"      value="Vite + React 18 (static)" />
+        <InfoRow label="Backend"    value="Rust / Axum @ 127.0.0.1:3000" />
 
         <Divider />
 
